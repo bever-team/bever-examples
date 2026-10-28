@@ -1,0 +1,54 @@
+# The order desk from the tutorial at https://bever.dev/guide/tutorial.
+
+Identity
+    Registration Enabled
+
+Entity Customer
+    Field Name Text(200)
+    Field Email Email
+    Field Phone Phone?
+    Field Tier Enum(Standard, Gold) = Standard
+
+Entity Product
+    Field Name Text(120)
+    Field Price Money
+    Field Active Boolean = True
+
+Entity Order
+    Field Number Text(20)
+    Field Customer -> Customer
+    Field Product -> Product
+    Field Quantity Int = 1
+    Field Status Enum(Open, Shipped, Cancelled) = Open
+    Field OrderedOn Date
+    Field SalesRep -> Identity
+
+    Present
+        RecordLabel Number
+        Field OrderedOn
+            Label "Order date"
+
+        Listing
+            Fields Number, Customer, Status, OrderedOn, SalesRep
+
+        Editing
+            Mode Modal
+
+        Creating
+            Mode Page
+            Fields Number, Customer, Product, Quantity, OrderedOn, SalesRep
+            Input Product
+                Picker Dropdown
+
+Action Crud Customer
+    By Authenticated
+    OrderBy Name
+
+Action Crud Product
+    By Authenticated
+
+Action Create, Read Order
+    By Authenticated
+
+Action Update, Delete Order
+    By SalesRep

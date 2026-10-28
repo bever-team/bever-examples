@@ -1,0 +1,58 @@
+# A help desk with pickers that differ from reading, and a role.
+# - Customers are private to the agent who owns them, but any agent can pick
+#   any customer for a ticket. Supervisors see every customer.
+# - Tickets can only be filed under teams you lead (a named picker).
+# - Only Supervisors delete tickets.
+Identity
+    Registration Enabled
+
+Role Supervisor
+
+Entity Customer
+    Field Name Text(200)
+    Field Email Email
+    Field Owner -> Identity
+
+Entity Team
+    Field Name Text(100)
+    Field Lead -> Identity
+
+Entity Ticket
+    Field Subject Text(200)
+    Field Customer -> Customer
+    Field Team -> Team Pick Mine
+    Field Priority Enum(Low, Normal, Urgent) = Normal
+    Field Status Enum(Open, Waiting, Solved) = Open
+    Field Assignee -> Identity?
+    Field Details Text(4000)?
+
+    Present
+        Listing
+            Fields Subject, Customer, Team, Priority, Status, Assignee
+        Creating
+            Input Customer
+                Picker Modal
+
+Action Create, Update, Delete Customer
+    By Owner
+
+Action Read Customer
+    By Owner
+    By Supervisor
+
+Action Pick Customer
+    By Authenticated
+    SearchBy Name, Email
+
+Action Create, Read Team
+    By Authenticated
+
+Action Pick Team As Mine
+    By Lead
+
+Action Create, Read, Update Ticket
+    By Authenticated
+    OrderBy Priority Desc
+
+Action Delete Ticket
+    By Supervisor

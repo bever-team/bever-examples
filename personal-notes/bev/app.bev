@@ -1,0 +1,24 @@
+# Private notes: everyone sees, changes, and deletes only their own notes.
+Identity
+    Registration Enabled
+
+Entity Note
+    Field Title Text(200)
+    Field Body Text(10000)?
+    Field Pinned Boolean = False
+    Field Owner -> Identity
+
+    Present
+        Listing
+            Fields Title, Pinned
+        Details
+            Fields Title, Body, Pinned
+        Editing
+            Mode Modal
+            Fields Title, Body, Pinned
+
+# 'By Owner' on Create means people can only create notes they own, so the
+# app fills in Owner for them. On Read it filters every list to your notes.
+Action Create, Read, Update, Delete Note
+    By Owner
+    OrderBy Title

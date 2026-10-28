@@ -1,0 +1,43 @@
+# A public product catalog: anyone can browse it without an account,
+# and signed-in staff add products in a dialog and edit them in the list.
+# Staff accounts are created from the command line (no self-registration).
+Identity
+
+Entity Category
+    Field Name Text(80)
+
+Entity Product
+    Field Name Text(120)
+    Field Category -> Category? OnDelete SetNull
+    Field Price Money
+    Field InStock Boolean = True
+    Field Website Url?
+    Field LaunchedOn Date?
+
+    Present
+        Label "Product"
+        Field InStock
+            Label "In stock"
+        Field LaunchedOn
+            Label "Launched"
+        Listing
+            Fields Name, Category, Price, InStock
+        Creating
+            Mode Modal
+        Editing
+            Mode Inline
+            Fields Name, Category, Price, InStock
+
+Action Read Category
+    By Anyone
+    OrderBy Name
+
+Action Create, Update, Delete Category
+    By Authenticated
+
+Action Read Product
+    By Anyone
+    OrderBy Name
+
+Action Create, Update, Delete Product
+    By Authenticated
