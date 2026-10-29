@@ -2,6 +2,8 @@
 
 Complete [Bever](https://bever.dev) models, each with a short explanation of what it demonstrates.
 
+> **Bever is pre-alpha.** The language and APIs will change in breaking ways between releases, and there is no upgrade path yet. Do not use it for production data. See [Status](https://bever.dev/guide/what-is-bever#status).
+
 | Example | Shows |
 | --- | --- |
 | [task-board](task-board) | The starter model: projects, tasks, sign-up, and assignees |
@@ -12,7 +14,7 @@ Complete [Bever](https://bever.dev) models, each with a short explanation of wha
 
 ## Run an example
 
-You need the [Bever CLI](https://bever.dev/guide/getting-started) (`dotnet tool install --global Bever.Cli`).
+You need the [Bever CLI](https://bever.dev/guide/getting-started) (`dotnet tool install --global --prerelease Bever.Cli`).
 
 ```sh
 git clone https://github.com/bever-team/bever-examples

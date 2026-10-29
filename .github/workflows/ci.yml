@@ -13,6 +13,6 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
-      - run: dotnet tool install --global Bever.Cli
+      - run: dotnet tool install --global --prerelease Bever.Cli
       - name: Check every example
         run: for example in */bev; do bever check "$example"; done
