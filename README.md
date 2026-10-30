@@ -20,7 +20,6 @@ You need the [Bever CLI](https://bever.dev/guide/getting-started) (`dotnet tool 
 git clone https://github.com/bever-team/bever-examples
 bever new "Help Desk"
 cp bever-examples/help-desk/bev/*.bev "Help Desk/bev/"
-rm "Help Desk/bev/app.bev"
 cd "Help Desk"
 bever dev
 ```
